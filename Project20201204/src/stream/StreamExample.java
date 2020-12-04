@@ -71,13 +71,22 @@ public class StreamExample {
 		
 		is=IntStream.rangeClosed(1, 10); //1~10까지
 		System.out.println("합: " + is.sum());
-		
+	
 		
 		//file정보를 통해서 만드는 Stream
 		Path path = Paths.get("list.txt");
 		try {
 			Stream<String> stream1 = Files.lines(path);
 			stream1.forEach(s->System.out.println(s));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//directory 정보를 읽어오는 Stream
+		path = Paths.get("c:/Program Files");
+		try {
+			Stream<Path> pStream = Files.list(path);
+		pStream.forEach(s->System.out.println(s));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
