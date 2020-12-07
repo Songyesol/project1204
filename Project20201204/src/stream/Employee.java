@@ -6,7 +6,7 @@ public class Employee {
 	private String lastName;
 	private String email;
 	private int salary;
-	private int department_id;
+	private int departmentId;
 	
 	
 	
@@ -14,14 +14,14 @@ public class Employee {
 	}
 	
 	public Employee(int employeeId, String firstName, String lastName, String email, int salary,
-			int department_id) {
+			int departmentId) {
 		super();
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.salary = salary;
-		this.department_id = department_id;
+		this.departmentId = departmentId;
 	}
 
 	public int getEmployeeId() {
@@ -64,14 +64,23 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	public int getDepartment_id() {
-		return department_id;
+	public int getDepartmentId() {
+		return departmentId;
 	}
 
-	public void setDepartment_id(int department_id) {
-		this.department_id = department_id;
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
 	}
 
+
+	public void showEmpInfo() {
+		System.out.println("사원번호: " + employeeId + 
+				", lastName: "+ lastName + ",이메일: "+email+", 월급: "+ salary);
+	}
 	
+	public void showEmpInfo1() {
+		System.out.println("사원번호: " + employeeId + 
+				", lastName: "+ lastName + ",이메일: "+email+", 월급: "+ salary + ", 부서번호" + departmentId);
+	}
 	
 }

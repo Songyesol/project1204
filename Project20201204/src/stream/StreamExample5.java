@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 import java.util.function.ToDoubleFunction;
@@ -14,7 +16,7 @@ import java.util.stream.Stream;
 
 import DAO.DAO;
 
-public class Employees {
+public class StreamExample5 {
 
 	/*hr: emp1
 	 * 50: 선적부서
@@ -53,34 +55,25 @@ public class Employees {
 		stream.forEach(s-> s.showEmpInfo());
 		
       
-		//1) salary가 10000이상인 사원 
-		System.out.println("salary가 10,000이상인 사원 >>>");
-		list.stream()
-		.filter((Employee t) ->t.getSalary()>10000)		
-		.forEach(s-> s.showEmpInfo());
+		//**부서가 없는 경우의 에러 현상 보기 
+		//Optional~의 기능 
+		System.out.println("40번 부서 평균>>>");
 		
-		
-		//2.선적부서의 급여합계 및 평균 
-		System.out.println("선적부서의 급여 합계 및 평균>>>");
-		int sum = list.stream().filter(t->t.getDepartmentId() == 50)
-		.mapToInt(v -> v.getSalary())
-		.sum();
-		System.out.println("합계: " + sum);
-		
-		double avg = list.stream().filter(t->t.getDepartmentId() == 50)
+		OptionalDouble avg = list.stream().filter(t->t.getDepartmentId() == 50)
 		.mapToDouble(v->v.getSalary())
-		.average().getAsDouble();
-		System.out.println("평균: " + avg);
+		.average();
 		
-		//3. 급여가 5,000~10,000사이의 사원정보 출력
-		System.out.println("급여가 5000~10000사이의 사원정보>>>");
-		list.stream().filter(new Predicate<Employee>(){
-
-			@Override
-			public boolean test(Employee t) {
-				return t.getSalary()>=5000 && t.getSalary()<=10000;
-			}
-			
-		}).forEach(s->s.showEmpInfo1());
+		System.out.println("평균: " + avg.orElse(0.0)); //1. .orElse() 값이 없으면 괄호안 값을 출력하겠다. 
+		
+//		avg.ifPresent(new DoubleConsumer() { //2. .ifPresent<- avg라는 변수에 값이 있는지 확인하는 메서드(=만약 존재한다면....)
+//
+//			@Override
+//			public void accept(double value) {
+//				System.out.println("평균: " + avg.getAsDouble());
+//			}
+//			
+//		}); 
+		
+	
 	}
 }
