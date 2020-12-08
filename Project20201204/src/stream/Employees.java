@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.IntConsumer;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import DAO.DAO;
@@ -82,5 +82,19 @@ public class Employees {
 			}
 			
 		}).forEach(s->s.showEmpInfo1());
+		
+		//4. emp1테이블의 salary 많은 사람 순으로 줄세우기 
+//		System.out.println("salary순으로 내림차순>>>");
+//		List<Employee> emp = list.stream().sorted().collect(Collectors.toList());
+//		for(Employee employee : emp) {
+//			employee.showEmpInfo1();
+//	}
+//		list.stream().sorted()
+//		.forEach(s->s.showEmpInfo1());
+		
+		
+		//5. firstName 기준으로 정렬
+		list.stream().sorted().forEach(t->t.showEmpInfo());
+		}
 	}
-}
+

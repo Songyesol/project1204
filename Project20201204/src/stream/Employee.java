@@ -1,6 +1,6 @@
 package stream;
 
-public class Employee {
+public class Employee implements Comparable<Employee> {
 	private int employeeId;
 	private String firstName;
 	private String lastName;
@@ -74,7 +74,7 @@ public class Employee {
 
 
 	public void showEmpInfo() {
-		System.out.println("사원번호: " + employeeId + 
+		System.out.println("사원번호: " + employeeId +", firstName: " + firstName+
 				", lastName: "+ lastName + ",이메일: "+email+", 월급: "+ salary);
 	}
 	
@@ -82,5 +82,15 @@ public class Employee {
 		System.out.println("사원번호: " + employeeId + 
 				", lastName: "+ lastName + ",이메일: "+email+", 월급: "+ salary + ", 부서번호" + departmentId);
 	}
+
+	@Override
+	public int compareTo(Employee o) {
+		if(this.getFirstName() !=null)
+			return this.firstName.compareTo(o.firstName);
+		else 
+			return 0;
+	}
 	
+
+
 }
